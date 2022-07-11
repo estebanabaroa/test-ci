@@ -21,7 +21,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node_version }}
-          cache: 'yarn'
 
       - run: git clone https://github.com/plebbit/plebbit-react-hooks.git && cd plebbit-react-hooks 
       # remove lock file to use the latest version of plebbit-js
