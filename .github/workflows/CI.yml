@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        node_version:
+          - 16
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: 'yarn'
+
+      - run: git clone https://github.com/plebbit/plebbit-react-hooks.git && cd plebbit-react-hooks 
+      # remove lock file to use the latest version of plebbit-js
+      - run: rm yarn.lock
+      - run: yarn
+      - run: yarn build
+      - run: yarn webpack
+      - run: yarn test:server & yarn test:server:wait-on
+      - run: CHROME_BIN=$(which chrome) FIREFOX_BIN=$(which firefox) yarn test:e2e
