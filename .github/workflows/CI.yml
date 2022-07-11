@@ -23,9 +23,7 @@ jobs:
           node-version: ${{ matrix.node_version }}
 
       - run: git clone https://github.com/plebbit/plebbit-react-hooks.git
-      - run: ls
-      - run: pwd
-      - run: cd "plebbit-react-hooks"
+      - working-directory: plebbit-react-hooks
       - run: ls
       - run: pwd
       # remove lock file to use the latest version of plebbit-js
