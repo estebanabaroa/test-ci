@@ -34,10 +34,10 @@ jobs:
         run: npx cap copy
 
       - name: Build app bundle
-        run: cd android && gradle bundle
+        run: cd android && ./gradlew assembleRelease
 
       - name: ls
-        run: ls android/app/build/outputs/bundle/release/
+        run: ls android/app/build/outputs/apk/release
 
       # - name: Extract Android signing key from env
       #   run: |
