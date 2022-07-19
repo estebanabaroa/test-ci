@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/estebanabaroa/test-ci#readme",
   "dependencies": {
+    "@capacitor/android": "^3.6.0",
     "@capacitor/core": "^3.6.0"
   },
   "devDependencies": {
