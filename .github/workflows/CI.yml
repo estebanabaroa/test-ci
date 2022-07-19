@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: 16.x
 
-        - run: npm install
-        # - run: npm run build
-        - run: npx cap update
-        - run: npx cap copy
-        - run: cd android && gradle bundle
-        - run: cd android && ./gradlew assembleRelease
-        - run: mv android/app/build/outputs/apk/release/app-release-unsigned.apk dist/app.apk
-        - run: ls dist
+      - run: npm install
+      # - run: npm run build
+      - run: npx cap update
+      - run: npx cap copy
+      - run: cd android && gradle bundle
+      - run: cd android && ./gradlew assembleRelease
+      - run: mv android/app/build/outputs/apk/release/app-release-unsigned.apk dist/app.apk
+      - run: ls dist
