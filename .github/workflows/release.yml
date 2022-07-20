@@ -34,10 +34,7 @@ jobs:
     - run: cd android && ./gradlew assembleRelease
 
     # sign apk
-    - run: |
-      cd android/app/build/outputs/apk/release
-      jarsigner -keystore ../../../../../plebbit.keystore -storepass ${{ secrets.PLEBBIT_REACT_KEYSTORE_PASSWORD }} app-release-unsigned.apk plebbit
-      zipalign 4 app-release-unsigned.apk app-release.apk
+    - run: cd android/app/build/outputs/apk/release && jarsigner -keystore ../../../../../plebbit.keystore -storepass ${{ secrets.PLEBBIT_REACT_KEYSTORE_PASSWORD }} app-release-unsigned.apk plebbit && zipalign 4 app-release-unsigned.apk app-release.apk
 
     # move apk to dist folder
     - run: mv android/app/build/outputs/apk/release/app-release.apk dist/plebbit-$(node -e "console.log(require('./package.json').version)").apk
