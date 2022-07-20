@@ -22,7 +22,7 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: 16
-    - run: sudo apt install -y zipalign
+    - run: sudo apt install -y zipalign apksigner
 
     # build react app
     - run: yarn
@@ -35,7 +35,8 @@ jobs:
     - run: cd android && ./gradlew assembleRelease
 
     # sign apk
-    - run: cd android/app/build/outputs/apk/release && jarsigner -keystore ../../../../../plebbit.keystore -storepass ${{ secrets.PLEBBIT_REACT_KEYSTORE_PASSWORD }} app-release-unsigned.apk plebbit && zipalign 4 app-release-unsigned.apk app-release.apk
+    # - run: cd android/app/build/outputs/apk/release && jarsigner -keystore ../../../../../plebbit.keystore -storepass ${{ secrets.PLEBBIT_REACT_KEYSTORE_PASSWORD }} app-release-unsigned.apk plebbit && zipalign 4 app-release-unsigned.apk app-release.apk
+    - run: cd android/app/build/outputs/apk/release && apksigner sign --ks ../../../../../plebbit.keystore --ks-pass pass:${{ secrets.PLEBBIT_REACT_KEYSTORE_PASSWORD }} --ks-key-alias plebbit app-release-unsigned.apk
 
     # move apk to dist folder
     - run: mv android/app/build/outputs/apk/release/app-release.apk dist/plebbit-$(node -e "console.log(require('./package.json').version)").apk
