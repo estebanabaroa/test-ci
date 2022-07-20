@@ -36,7 +36,7 @@ jobs:
 
     # sign apk
     # - run: cd android/app/build/outputs/apk/release && jarsigner -keystore ../../../../../plebbit.keystore -storepass ${{ secrets.PLEBBIT_REACT_KEYSTORE_PASSWORD }} app-release-unsigned.apk plebbit && zipalign 4 app-release-unsigned.apk app-release.apk
-    - run: cd android/app/build/outputs/apk/release && apksigner sign --ks ../../../../../plebbit.keystore --ks-pass pass:${{ secrets.PLEBBIT_REACT_KEYSTORE_PASSWORD }} --ks-key-alias plebbit --out app-release-signed.apk app-release-unsigned.apk
+    - run: cd android/app/build/outputs/apk/release && apksigner sign --ks ../../../../../plebbit.keystore --ks-pass pass:${{ secrets.PLEBBIT_REACT_KEYSTORE_PASSWORD }} --ks-key-alias plebbit --v2-signing-enabled --out app-release-signed.apk app-release-unsigned.apk
 
     # optimize apk
     # - run: cd android/app/build/outputs/apk/release && zipalign 4 app-release-signed.apk app-release.apk
