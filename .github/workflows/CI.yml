@@ -21,3 +21,4 @@ jobs:
         with:
           commit_message: CI build
           file_pattern: dist
+          add_options: '--force'
