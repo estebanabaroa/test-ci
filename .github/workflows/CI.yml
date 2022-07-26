@@ -13,11 +13,10 @@ jobs:
 
       # build dist folder
       - run: mkdir -p dist && echo $(date) > "dist/$(date).txt" && ls -la dist
-      - run: git add dist -f
+      - run: git add dist --force
       - run: git status
 
       # commit and push dist folder
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: CI build
-          add_options: '--force'
