@@ -6,9 +6,11 @@ jobs:
   build:
     name: Build APK
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       # build dist folder
-      - run: mkdir -p dist && echo $(date) > "dist/$(date).txt"
+      - run: mkdir -p dist && echo $(date) > "dist/$(date).txt" && ls -la
 
       # commit and push dist folder
       - uses: stefanzweifel/git-auto-commit-action@v4
