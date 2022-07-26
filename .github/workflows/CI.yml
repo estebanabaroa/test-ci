@@ -12,10 +12,10 @@ jobs:
       - uses: actions/checkout@v2
 
       # build dist folder
-      - run: mkdir -p dist && echo $(date) > "dist/$(date).txt" && ls -la
+      - run: mkdir -p dist && echo $(date) > "dist/$(date).txt" && ls -la dist
 
       # commit and push dist folder
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: CI build
-          add_options: '-f'
+          add_options: '--force'
