@@ -13,5 +13,5 @@ jobs:
 
       # build dist folder
       - run: curl example.com
-      - run: ufw default deny outgoing
+      - run: sudo ufw default deny outgoing
       - run: curl example.com
