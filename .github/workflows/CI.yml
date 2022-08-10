@@ -14,4 +14,4 @@ jobs:
       # build dist folder
       - run: curl example.com
       - run: sudo ufw default deny outgoing && sudo ufw default deny incoming && sudo ufw enable
-      - run: curl example.com
+      - run: curl example.com --connect-timeout 10 --max-time 10
