@@ -1,4 +1,4 @@
-name: CI
+name: CI build
 
 on:
   workflow_run:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build APK
+    name: CI build
     runs-on: ubuntu-latest
     permissions:
       contents: write
