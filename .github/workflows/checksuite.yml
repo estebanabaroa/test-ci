@@ -1,15 +1,12 @@
-name: CI build
+name: checksuite
 
 on:
-  workflow_run:
-    workflows:
-      - 'asdflkjalsdf'
-    types:
-      - 'completed'
+  check_suite:
+    types: [completed]
 
 jobs:
   build:
-    name: CI build
+    name: checksuite
     runs-on: ubuntu-latest
     permissions:
       contents: write

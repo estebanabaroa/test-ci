@@ -1,15 +1,11 @@
-name: CI build
+name: status
 
 on:
-  workflow_run:
-    workflows:
-      - 'asdflkjalsdf'
-    types:
-      - 'completed'
+  status
 
 jobs:
   build:
-    name: CI build
+    name: status
     runs-on: ubuntu-latest
     permissions:
       contents: write

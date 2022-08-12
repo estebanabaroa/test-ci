@@ -1,15 +1,12 @@
-name: CI build
+name: checkrun
 
 on:
-  workflow_run:
-    workflows:
-      - 'asdflkjalsdf'
-    types:
-      - 'completed'
+  check_run:
+    types: [completed]
 
 jobs:
   build:
-    name: CI build
+    name: checkrun
     runs-on: ubuntu-latest
     permissions:
       contents: write
