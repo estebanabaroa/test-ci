@@ -23,5 +23,5 @@ jobs:
           artifacts: 'dist/plebones*.AppImage,dist/plebones-html*.zip'
           token: ${{ secrets.GITHUB_TOKEN }}
           replacesArtifacts: true
-          bodyFile: "release-body.txt"
+          bodyFile: "./release-body.txt"
           allowUpdates: true
