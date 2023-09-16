@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # publish version release
-      - run: echo "$(cat changelog.txt)" > release-body.txt
+      - run: echo "Progressive web app mirrors:\n- https://plebchan.eth.limo\n- https://plebchan.eth.link\n- https://cloudflare-ipfs.com/ipns/plebchan.eth (insecure, no subdomain isolation)\n\nCLI client:\n- https://github.com/plebbit/plebbit-cli/releases/latest$(cat changelog.txt)" > release-body.txt
       - run: cat release-body.txt
       - uses: ncipollo/release-action@v1
         with:
