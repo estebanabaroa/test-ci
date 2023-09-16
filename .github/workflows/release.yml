@@ -14,6 +14,7 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v2
 
       # publish version release
       - run: echo "RELEASE_CHANGELOG=\"$(cat changelog.txt | awk -v ORS='\\n' '1')\"" >> $GITHUB_ENV
