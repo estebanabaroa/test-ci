@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
 
       # publish version release
-      - run: echo "RELEASE_CHANGELOG=\'$(cat changelog.txt)\'" >> $GITHUB_ENV
+      - run: echo "RELEASE_CHANGELOG='$(cat changelog.txt)'" >> $GITHUB_ENV
       - uses: ncipollo/release-action@v1
         with:
           artifacts: 'dist/plebones*.AppImage,dist/plebones-html*.zip'
