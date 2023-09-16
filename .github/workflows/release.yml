@@ -17,11 +17,11 @@ jobs:
       - uses: actions/checkout@v2
 
       # publish version release
-      - run: echo "RELEASE_CHANGELOG='$(cat changelog.txt)'" >> $GITHUB_ENV
+      - run: echo "Progressive web app mirrors:\n- https://plebones.eth.limo\n- https://plebones.eth.link\n- https://cloudflare-ipfs.com/ipns/plebones.eth (insecure, no subdomain isolation)\n\nCLI client:\n- https://github.com/plebbit/plebbit-cli/releases/latest\n\n$(cat changelog.txt)" > release-body.txt
       - uses: ncipollo/release-action@v1
         with:
           artifacts: 'dist/plebones*.AppImage,dist/plebones-html*.zip'
           token: ${{ secrets.GITHUB_TOKEN }}
           replacesArtifacts: true
-          body: "Progressive web app mirrors:\n- https://plebones.eth.limo\n- https://plebones.eth.link\n- https://cloudflare-ipfs.com/ipns/plebones.eth (insecure, no subdomain isolation)\n\nCLI client:\n- https://github.com/plebbit/plebbit-cli/releases/latest\n\n${{env.RELEASE_CHANGELOG}}"
+          bodyFile: "release-body.txt"
           allowUpdates: true
