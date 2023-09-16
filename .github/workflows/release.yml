@@ -18,9 +18,10 @@ jobs:
 
       # publish version release
       - run: echo "Progressive web app mirrors:\n- https://plebones.eth.limo\n- https://plebones.eth.link\n- https://cloudflare-ipfs.com/ipns/plebones.eth (insecure, no subdomain isolation)\n\nCLI client:\n- https://github.com/plebbit/plebbit-cli/releases/latest\n\n$(cat changelog.txt)" > release-body.txt
+      -run: cat release-body.txt
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: 'dist/plebones*.AppImage,dist/plebones-html*.zip'
+          artifacts: 'start.js'
           token: ${{ secrets.GITHUB_TOKEN }}
           replacesArtifacts: true
           bodyFile: "./release-body.txt"
