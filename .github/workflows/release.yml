@@ -16,7 +16,7 @@ jobs:
     steps:
 
       # publish version release
-      - run: echo "RELEASE_CHANGELOG=$(cat changelog.txt | awk -v ORS='\\n' '1')" >> $GITHUB_ENV
+      - run: echo "RELEASE_CHANGELOG=\"$(cat changelog.txt | awk -v ORS='\\n' '1')\"" >> $GITHUB_ENV
       - uses: ncipollo/release-action@v1
         with:
           artifacts: 'dist/plebones*.AppImage,dist/plebones-html*.zip'
