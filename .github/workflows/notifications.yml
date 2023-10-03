@@ -24,16 +24,18 @@ jobs:
       env:
         GITHUB_CONTEXT: ${{ toJSON(matrix.commit) }}
       run: echo "$GITHUB_CONTEXT"
+
+    - name: "notification message"
+      run: echo "<code>${{ matrix.commit.message }}</code>\n\n" >> message.txt
+      run: echo "${{ matrix.commit.timestamp }}" | cut -d "T" -f 1 >> message.txt
+      run: echo " by ${{ matrix.commit.author.username }} in ${{ github.repository }}\n" >> message.txt
+      run: echo "${{ matrix.commit.url }}" >> message.txt
     # @plebbit telegram chat id is -1234
-    - name: "telegram notifications"
+    - name: "telegram notification"
       uses: appleboy/telegram-action@master
       with:
         to: 1986059725
         token: ${{ secrets.TELEGRAM_TOKEN }}
         disable_web_page_preview: true
         format: html
-        message: |
-          <code>${{ matrix.commit.message }}</code>
-
-          ${{ matrix.commit.timestamp }} by ${{ matrix.commit.author.username }} in ${{ github.repository }}
-          ${{ matrix.commit.url }}
+        message_file: message.txt
