@@ -31,5 +31,5 @@ jobs:
           ${{ github.event.commits[0].message }}
           ${{ github.event.commits[0].author.name }}
 
-          by ${{ github.actor }} in ${{ github.action_repository }}
-          ${{ github.event.created_at }}
+          by ${{ github.actor }} in ${{ github.repository }}
+          ${{ github.event.commits[0].author.name }}
