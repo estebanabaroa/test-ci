@@ -10,9 +10,8 @@ on:
       - master
 
 jobs:
-  on-failure:
+  telegram:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
     # @plebbitjs telegram chat id is -1001792656766
     - name: "@plebbitjs telegram alert"
