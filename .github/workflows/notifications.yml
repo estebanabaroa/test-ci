@@ -15,7 +15,9 @@ jobs:
     # if: ${{ github.event.type == 'PushEvent' }}
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ github.event.type }}
+    - run: echo ${{ github.action }}
+    - run: echo ${{ github.event_name }}
+
     # @plebbit telegram chat id is -1001792656766
     - name: "telegram notifications"
       uses: appleboy/telegram-action@master
@@ -24,6 +26,7 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
           ${{ github.event.commits[0].message }}
+          ${{ github.event.commits[0].author.name }}
 
-          by ${{ github.event.author.login }} in ${{ github.event.repository.name }}
+          by ${{ github.actor }} in ${{ github.action_repository }}
           ${{ github.event.created_at }}
