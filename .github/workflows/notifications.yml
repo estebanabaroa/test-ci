@@ -13,24 +13,23 @@ on:
 
 jobs:
   push:
-    # https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#pushevent
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         commit: ${{ github.event.commits }}
     steps:
-    - name: debug
-      env:
-        GITHUB_CONTEXT: ${{ toJSON(matrix.commit) }}
-      run: echo "$GITHUB_CONTEXT"
+    # - name: debug
+    #   env:
+    #     DEBUG: ${{ toJSON(matrix.commit) }}
+    #   run: echo "$DEBUG"
 
     # write message to file
     - run: echo "<code>${{ matrix.commit.message }}</code>" >> message.txt
     - run: echo "" >> message.txt
     - run: echo "by <i>${{ matrix.commit.author.username }}</i>" >> message.txt
     - run: echo "${{ matrix.commit.url }}" >> message.txt
-    - run: date -d "${{ matrix.commit.timestamp }}" +"on %d/%m/%y at %H:%M:%S" >> message.txt
+    - run: date -d "${{ matrix.commit.timestamp }}" +"on %d/%m/%y at %H:%M" >> message.txt
 
     # send message, @plebbit telegram chat id is -1234
     - name: "telegram notification"
@@ -41,3 +40,29 @@ jobs:
         disable_web_page_preview: true
         format: html
         message_file: message.txt
+
+  release:
+    # if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: debug
+      env:
+        DEBUG: ${{ toJSON(github) }}
+      run: echo "$DEBUG"
+
+    # write message to file
+    # - run: echo "<code>${{ matrix.commit.message }}</code>" >> message.txt
+    # - run: echo "" >> message.txt
+    # - run: echo "by <i>${{ matrix.commit.author.username }}</i>" >> message.txt
+    # - run: echo "${{ matrix.commit.url }}" >> message.txt
+    # - run: date -d "${{ matrix.commit.timestamp }}" +"on %d/%m/%y at %H:%M:%S" >> message.txt
+
+    # # send message, @plebbit telegram chat id is -1234
+    # - name: "telegram notification"
+    #   uses: appleboy/telegram-action@master
+    #   with:
+    #     to: 1986059725
+    #     token: ${{ secrets.TELEGRAM_TOKEN }}
+    #     disable_web_page_preview: true
+    #     format: html
+    #     message_file: message.txt
