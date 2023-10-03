@@ -28,8 +28,9 @@ jobs:
     # write message to file
     - run: echo "<code>${{ matrix.commit.message }}</code>" >> message.txt
     - run: echo "" >> message.txt
-    - run: echo "by <i>${{ matrix.commit.author.username }}</i> on $(date -d "${{ matrix.commit.timestamp }}" +"on %d/%m/%y")" >> message.txt
+    - run: echo "by <i>${{ matrix.commit.author.username }}</i>" >> message.txt
     - run: echo "${{ matrix.commit.url }}" >> message.txt
+    - run: date -d "${{ matrix.commit.timestamp }}" +"on %d/%m/%y" >> message.txt
 
     # send message, @plebbit telegram chat id is -1234
     - name: "telegram notification"
