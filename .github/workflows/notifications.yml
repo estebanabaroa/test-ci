@@ -1,6 +1,4 @@
 # send notifications to telegram group on commits, releases, issues
-# https://docs.github.com/en/enterprise-cloud@latest/actions/learn-github-actions/contexts#github-context
-
 name: notifications
 
 on:
@@ -35,11 +33,11 @@ jobs:
     - run: echo "${{ matrix.commit.url }}" >> message.txt
     - run: date -d "${{ matrix.commit.timestamp }}" +"%d/%m/%y at %H:%M" >> message.txt
 
-    # send message, @plebbit telegram chat id is -1234
+    # send message, @plebbit telegram chat id is 1665335693
     - name: "telegram notification"
       uses: appleboy/telegram-action@master
       with:
-        to: 1986059725
+        to: 1665335693
         token: ${{ secrets.TELEGRAM_TOKEN }}
         disable_web_page_preview: true
         format: html
@@ -60,11 +58,11 @@ jobs:
     - run: echo "${{ github.event.release.body }}" >> message.txt
     - run: echo "${{ github.event.release.html_url }}" >> message.txt
 
-    # send message, @plebbit telegram chat id is -1234
+    # send message, @plebbit telegram chat id is 1665335693
     - name: "telegram notification"
       uses: appleboy/telegram-action@master
       with:
-        to: 1986059725
+        to: 1665335693
         token: ${{ secrets.TELEGRAM_TOKEN }}
         disable_web_page_preview: true
         format: html
@@ -74,10 +72,10 @@ jobs:
     if: ${{ github.event_name == 'issues' }}
     runs-on: ubuntu-latest
     steps:
-    - name: debug
-      env:
-        DEBUG: ${{ toJSON(github) }}
-      run: echo "$DEBUG"
+    # - name: debug
+    #   env:
+    #     DEBUG: ${{ toJSON(github) }}
+    #   run: echo "$DEBUG"
 
     # write message to file
     - run: echo "<code>${{ github.event.issue.title }}</code>" >> message.txt
@@ -85,11 +83,11 @@ jobs:
     - run: echo "by <i>${{ github.event.issue.user.login }}</i>" >> message.txt
     - run: echo "${{ github.event.issue.html_url }}" >> message.txt
 
-    # send message, @plebbit telegram chat id is -1234
+    # send message, @plebbit telegram chat id is 1665335693
     - name: "telegram notification"
       uses: appleboy/telegram-action@master
       with:
-        to: 1986059725
+        to: 1665335693
         token: ${{ secrets.TELEGRAM_TOKEN }}
         disable_web_page_preview: true
         format: html
