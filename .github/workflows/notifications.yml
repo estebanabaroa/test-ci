@@ -16,10 +16,12 @@ jobs:
     # https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#pushevent
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
+    matrix:
+      commit: ${{ github.event.commits }}
     steps:
     - name: debug
       env:
-        GITHUB_CONTEXT: ${{ toJSON(github) }}
+        GITHUB_CONTEXT: ${{ toJSON(matrix.commit) }}
       run: echo "$GITHUB_CONTEXT"
     # @plebbit telegram chat id is -1234
     - name: "telegram notifications"
@@ -30,7 +32,7 @@ jobs:
         disable_web_page_preview: true
         format: html
         message: |
-          <code>${{ github.event.commits[0].message }}</code>
+          <code>${{ matrix.commit.message }}</code>
 
-          ${{ github.event.commits[0].timestamp }} by ${{ github.event.commits[0].author.username }} in ${{ github.repository }}
-          ${{ github.event.commits[0].url }}
+          ${{ matrix.commit.timestamp }} by ${{ matrix.commit.author.username }} in ${{ github.repository }}
+          ${{ matrix.commit.url }}
