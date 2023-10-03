@@ -55,18 +55,17 @@ jobs:
       run: echo "$DEBUG"
 
     # write message to file
-    # - run: echo "<code>${{ matrix.commit.message }}</code>" >> message.txt
-    # - run: echo "" >> message.txt
-    # - run: echo "by <i>${{ matrix.commit.author.username }}</i>" >> message.txt
-    # - run: echo "${{ matrix.commit.url }}" >> message.txt
-    # - run: date -d "${{ matrix.commit.timestamp }}" +"on %d/%m/%y at %H:%M:%S" >> message.txt
+    - run: echo "<b>${{ github.event.repository.name }} ${{ github.event.release.name }}</b>" >> message.txt
+    - run: echo "" >> message.txt
+    - run: echo "${{ github.event.release.body }}" >> message.txt
+    - run: echo "${{ github.event.release.html_url }}" >> message.txt
 
-    # # send message, @plebbit telegram chat id is -1234
-    # - name: "telegram notification"
-    #   uses: appleboy/telegram-action@master
-    #   with:
-    #     to: 1986059725
-    #     token: ${{ secrets.TELEGRAM_TOKEN }}
-    #     disable_web_page_preview: true
-    #     format: html
-    #     message_file: message.txt
+    # send message, @plebbit telegram chat id is -1234
+    - name: "telegram notification"
+      uses: appleboy/telegram-action@master
+      with:
+        to: 1986059725
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        disable_web_page_preview: true
+        format: html
+        message_file: message.txt
