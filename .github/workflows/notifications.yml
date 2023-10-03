@@ -1,4 +1,6 @@
 # send notifications to telegram group on commits, releases, issues
+# https://docs.github.com/en/enterprise-cloud@latest/actions/learn-github-actions/contexts#github-context
+
 name: notifications
 
 on:
@@ -12,13 +14,15 @@ on:
 jobs:
   push:
     # https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#pushevent
-    # if: ${{ github.event.type == 'PushEvent' }}
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ github.action }}
-    - run: echo ${{ github.event_name }}
-
-    # @plebbit telegram chat id is -1001792656766
+      - name: debug
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
+    steps:
+    # @plebbit telegram chat id is -1234
     - name: "telegram notifications"
       uses: appleboy/telegram-action@master
       with:
