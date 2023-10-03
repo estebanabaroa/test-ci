@@ -10,7 +10,9 @@ on:
       - master
 
 jobs:
-  telegram:
+  push:
+    # https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#pushevent
+    if: ${{ github.event.type == 'PushEvent' }}
     runs-on: ubuntu-latest
     steps:
     # @plebbitjs telegram chat id is -1001792656766
@@ -20,8 +22,7 @@ jobs:
         to: 1986059725
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: |
-          ${{ github.event.workflow_run.head_commit.message }}
+          ${{ github.event.commits[0].message }}
 
-          by ${{ github.event.workflow_run.head_commit.author.name }}
-          ${{ github.event.workflow_run.head_commit.author.timestamp }}
-          ${{ github.event.workflow_run.head_commit.author.url }}
+          by ${{ github.event.author.login }} in ${{ github.event.repository.name }}
+          ${{ github.event.created_at }}
