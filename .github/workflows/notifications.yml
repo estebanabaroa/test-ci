@@ -12,11 +12,12 @@ on:
 jobs:
   push:
     # https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#pushevent
-    if: ${{ github.event.type == 'PushEvent' }}
+    # if: ${{ github.event.type == 'PushEvent' }}
     runs-on: ubuntu-latest
     steps:
-    # @plebbitjs telegram chat id is -1001792656766
-    - name: "@plebbitjs telegram alert"
+    - run: echo ${{ github.event }}
+    # @plebbit telegram chat id is -1001792656766
+    - name: "telegram notifications"
       uses: appleboy/telegram-action@master
       with:
         to: 1986059725
