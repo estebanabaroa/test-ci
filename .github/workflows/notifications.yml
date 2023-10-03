@@ -12,6 +12,8 @@ on:
       - master
   release:
     types: [published]
+  issues:
+    types: [opened]
 
 jobs:
   push:
