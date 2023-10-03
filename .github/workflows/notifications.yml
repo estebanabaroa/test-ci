@@ -28,11 +28,9 @@ jobs:
         to: 1986059725
         token: ${{ secrets.TELEGRAM_TOKEN }}
         disable_web_page_preview: true
+        format: html
         message: |
-          ```
-          ${{ github.event.commits[0].message }}
-          ```
+          <code>${{ github.event.commits[0].message }}</code>
 
-          by ${{ github.event.commits[0].author.username }} in ${{ github.repository }}
-          ${{ github.event.commits[0].timestamp }}
+          ${{ github.event.commits[0].timestamp }} by ${{ github.event.commits[0].author.username }} in ${{ github.repository }}
           ${{ github.event.commits[0].url }}
