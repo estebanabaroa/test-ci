@@ -16,8 +16,9 @@ jobs:
     # https://docs.github.com/en/rest/overview/github-event-types?apiVersion=2022-11-28#pushevent
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
-    matrix:
-      commit: ${{ github.event.commits }}
+    strategy:
+      matrix:
+        commit: ${{ github.event.commits }}
     steps:
     - name: debug
       env:
