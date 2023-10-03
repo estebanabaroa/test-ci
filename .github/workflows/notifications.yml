@@ -28,7 +28,8 @@ jobs:
     # write message to file
     - run: echo "<code>${{ matrix.commit.message }}</code>" >> message.txt
     - run: echo "" >> message.txt
-    - run: echo "$(echo "${{ matrix.commit.timestamp }}" | cut -d "T" -f 1) by ${{ matrix.commit.author.username }} in ${{ github.repository }}" >> message.txt
+    - run: echo "by <i>${{ matrix.commit.author.username }}</i>" >> message.txt
+    - run: echo "$(echo "${{ matrix.commit.timestamp }}" | cut -d "T" -f 1), $(echo "${{ matrix.commit.timestamp }}" | cut -d "T" -f 2 | cut -d ":" -f 1,2)" >> message.txt
     - run: echo "${{ matrix.commit.url }}" >> message.txt
 
     # send message, @plebbit telegram chat id is -1234
