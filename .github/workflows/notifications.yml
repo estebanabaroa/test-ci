@@ -10,6 +10,8 @@ on:
   push:
     branches:
       - master
+  release:
+    types: [published]
 
 jobs:
   push:
@@ -29,7 +31,7 @@ jobs:
     - run: echo "" >> message.txt
     - run: echo "by <i>${{ matrix.commit.author.username }}</i>" >> message.txt
     - run: echo "${{ matrix.commit.url }}" >> message.txt
-    - run: date -d "${{ matrix.commit.timestamp }}" +"on %d/%m/%y at %H:%M" >> message.txt
+    - run: date -d "${{ matrix.commit.timestamp }}" +"%d/%m/%y at %H:%M" >> message.txt
 
     # send message, @plebbit telegram chat id is -1234
     - name: "telegram notification"
@@ -42,7 +44,7 @@ jobs:
         message_file: message.txt
 
   release:
-    # if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'release' }}
     runs-on: ubuntu-latest
     steps:
     - name: debug
