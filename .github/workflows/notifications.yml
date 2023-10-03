@@ -32,4 +32,5 @@ jobs:
           ${{ github.event.commits[0].author.name }}
 
           by ${{ github.actor }} in ${{ github.repository }}
-          ${{ github.event.commits[0].author.name }}
+          ${{ github.event.commits[0].timestamp }}
+          ${{ github.event.commits[0].url }}
